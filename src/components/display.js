@@ -10,7 +10,7 @@ class Display extends Components {
             {this.props.value}
         </div>
         )
-    }
+    }  
 }
 
 export default Display;
