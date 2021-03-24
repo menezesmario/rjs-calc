@@ -7,9 +7,11 @@ export class Button extends Component {
         this.props.onClick();
     }
     render() {
-        <div className={button} onClick={handleClick}>
+        return (
+        <div className={'button'} onClick={this.handleClick.bind(this)}>
             {this.props.display}
         </div>
+        )
     }
 }
 
