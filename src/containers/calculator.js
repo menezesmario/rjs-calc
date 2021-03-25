@@ -3,7 +3,7 @@ import { Button } from '../components/button';
 import Display from '../components/display';
 
 class Calculator extends Component{
-    initialState = {firstValue: 0, secondValue:0}
+    initialState = {firstValue: 0, secondValue:0, operator:1, isSum: false}
 
     constructor(props) {
         super(props);
@@ -11,13 +11,29 @@ class Calculator extends Component{
     }
 
     putValue = (value) => {
-        const lastValue = this.state.firstValue;
-        this.setState({firstValue:(lastValue*10)+value})
+        const lastValue = this.state.operator===1 ? this.state.firstValue : this.state.secondValue;
+        switch (this.state.operator){
+            case 1: this.setState({firstValue:(lastValue*10) + value});
+            break;
+            case 2: this.setState({secondValue:(lastValue*10) + value});
+            break;
+
+        }
     }
 
     getValue = () => {
+        switch(this.state.operator){
+            case 1:return this.state.firstValue;
+            case 2:return this.state.secondValue;
+        }
+
         return this.state.firstValue;
     }
+
+    pickOperation = (isSum) => {
+        this.setState({operator:2, isSum})
+    }
+
     render() {
         return (
             <div className={'calculator'}>
@@ -35,8 +51,8 @@ class Calculator extends Component{
                     <Button display={"8"} onClick={()=>this.putValue(8)}/>
                     <Button display={"9"} onClick={()=>this.putValue(9)}/>
                     <Button display={"0"} onClick={()=>this.putValue(0)}/>
-                    <Button display={"+"} />
-                    <Button display={"-"} />
+                    <Button display={"+"} onClick={()=>this.pickOperation(true)}/>
+                    <Button display={"-"} onClick={()=>this.pickOperation(false)}/>
                     <Button display={"="} />
                     <Button display={"C"} />
                 </div>
