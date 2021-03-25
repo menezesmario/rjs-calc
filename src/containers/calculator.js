@@ -40,27 +40,32 @@ class Calculator extends Component{
         this.setState({operator:3})
     }
 
+    clear = () => {
+        this.setState(this.initialState);
+    }
+
     render() {
+        const {operator} = this.state;
         return (
             <div className={'calculator'}>
                 <div>
                     <Display value={this.getValue()}/>
                 </div>
                 <div className={'buttons'}>
-                    <Button display={"1"} onClick={()=>this.putValue(1)}/>
-                    <Button display={"2"} onClick={()=>this.putValue(2)}/>
-                    <Button display={"3"} onClick={()=>this.putValue(3)}/>
-                    <Button display={"4"} onClick={()=>this.putValue(4)}/>
-                    <Button display={"5"} onClick={()=>this.putValue(5)}/>
-                    <Button display={"6"} onClick={()=>this.putValue(6)}/>
-                    <Button display={"7"} onClick={()=>this.putValue(7)}/>
-                    <Button display={"8"} onClick={()=>this.putValue(8)}/>
-                    <Button display={"9"} onClick={()=>this.putValue(9)}/>
-                    <Button display={"0"} onClick={()=>this.putValue(0)}/>
-                    <Button display={"+"} onClick={()=>this.pickOperation(true)}/>
-                    <Button display={"-"} onClick={()=>this.pickOperation(false)}/>
-                    <Button display={"="} onClick={ () => this.execOperation() } />
-                    <Button display={"C"} />
+                    <Button display={"1"} onClick={ () => this.putValue(1)} disabled={operator === 3} />
+                    <Button display={"2"} onClick={ () => this.putValue(2)} disabled={operator === 3} />
+                    <Button display={"3"} onClick={ () => this.putValue(3)} disabled={operator === 3} />
+                    <Button display={"4"} onClick={ () => this.putValue(4)} disabled={operator === 3} />
+                    <Button display={"5"} onClick={ () => this.putValue(5)} disabled={operator === 3} />
+                    <Button display={"6"} onClick={ () => this.putValue(6)} disabled={operator === 3} />
+                    <Button display={"7"} onClick={ () => this.putValue(7)} disabled={operator === 3} />
+                    <Button display={"8"} onClick={ () => this.putValue(8)} disabled={operator === 3} />
+                    <Button display={"9"} onClick={ () => this.putValue(9)} disabled={operator === 3} />
+                    <Button display={"0"} onClick={ () => this.putValue(0)} disabled={operator === 3} />
+                    <Button display={"+"} onClick={ () => this.pickOperation(true)} disabled={operator !== 1} />
+                    <Button display={"-"} onClick={ () => this.pickOperation(false)} disabled={operator !== 1} />
+                    <Button display={"="} onClick={ () => this.execOperation() } disabled={operator === 1}  />
+                    <Button display={"C"} onClick={ () => this.clear() } />
                 </div>
                 <div className={'footer'}>
                     reactCalc
