@@ -22,9 +22,11 @@ class Calculator extends Component{
     }
 
     getValue = () => {
-        switch(this.state.operator){
-            case 1:return this.state.firstValue;
-            case 2:return this.state.secondValue;
+        const {firstValue, secondValue, isSum, operator} = this.state;
+        switch(operator){
+            case 1: return firstValue;
+            case 2: return secondValue;
+            case 3: return isSum ? firstValue + secondValue : firstValue - secondValue;
         }
 
         return this.state.firstValue;
@@ -32,6 +34,10 @@ class Calculator extends Component{
 
     pickOperation = (isSum) => {
         this.setState({operator:2, isSum})
+    }
+
+    execOperation = () => {
+        this.setState({operator:3})
     }
 
     render() {
@@ -53,7 +59,7 @@ class Calculator extends Component{
                     <Button display={"0"} onClick={()=>this.putValue(0)}/>
                     <Button display={"+"} onClick={()=>this.pickOperation(true)}/>
                     <Button display={"-"} onClick={()=>this.pickOperation(false)}/>
-                    <Button display={"="} />
+                    <Button display={"="} onClick={ () => this.execOperation() } />
                     <Button display={"C"} />
                 </div>
                 <div className={'footer'}>
